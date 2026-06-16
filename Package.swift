@@ -179,7 +179,7 @@ targets.append(contentsOf: [
 let package = Package(
     name: "SwiftGodot",
     platforms: [
-        .macOS(.v13),
+        .macOS(.v14),
         .iOS (.v15)
     ],
     products: products,
