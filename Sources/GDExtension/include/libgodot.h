@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include "gdextension_interface.gen.h"
+#include "gdextension_interface.h"
 
 #ifdef __cplusplus
 extern "C" {
