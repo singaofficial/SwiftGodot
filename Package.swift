@@ -197,14 +197,7 @@ var targets: [Target] = [
         dependencies: ["GDExtension"],
         swiftSettings: [
             .define("CUSTOM_BUILTIN_IMPLEMENTATIONS"),
-            .unsafeFlags(
-                [
-                    "-suppress-warnings",
-                    "-Xfrontend", "-conditional-runtime-records",
-                    "-Xfrontend", "-internalize-at-link",
-                    "-Xfrontend", "-lto=llvm-full",
-                ]
-            ),
+            // unsafeFlags removed: SwiftPM rejects them in packages consumed by version.
             .swiftLanguageMode(.v5),
         ],
         plugins: ["CodeGeneratorPlugin", "SwiftGodotMacroLibrary"]
@@ -218,7 +211,7 @@ var targets: [Target] = [
         swiftSettings: [
             .swiftLanguageMode(.v5),
             .define("CUSTOM_BUILTIN_IMPLEMENTATIONS"),
-            .unsafeFlags(["-suppress-warnings"])
+            // unsafeFlags removed: SwiftPM rejects them in packages consumed by version.
         ],
         plugins: ["CodeGeneratorPlugin"]
     ),
