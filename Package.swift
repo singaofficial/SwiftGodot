@@ -29,8 +29,9 @@ let withMultiProcessTrait = "with_multi_process"
 let useVendoredModuleNames = false
 let usePreparedGenerator = false
 let usePrecompiledSwiftSyntax = false
-let emitStableInterfaces = true
-let suppressGeneratedWarnings = true
+// singa: both off, as each adds unsafeFlags, which SwiftPM rejects in packages consumed by version.
+let emitStableInterfaces = false
+let suppressGeneratedWarnings = false
 let staticCachesOnMacOS = false
 
 let swiftGodotPackageName = useVendoredModuleNames ? "XogotSwiftGodot" : "SwiftGodot"
@@ -301,14 +302,7 @@ var targets: [Target] = [
         swiftSettings: [
             .define("CUSTOM_BUILTIN_IMPLEMENTATIONS"),
             .define("SWIFTGODOT_WITH_MULTI_PROCESS", .when(traits: [withMultiProcessTrait])),
-            .unsafeFlags(
-                [
-                    "-suppress-warnings",
-                    "-Xfrontend", "-conditional-runtime-records",
-                    "-Xfrontend", "-internalize-at-link",
-                    "-Xfrontend", "-lto=llvm-full",
-                ]
-            ),
+            // singa: unsafeFlags removed; SwiftPM rejects them in packages consumed by version.
             .swiftLanguageMode(.v5),
         ] + swiftGodotBuildSettings + stableInterfaceSettings + generatedTargetStaticCacheSettings,
         plugins: ["CodeGeneratorPlugin", "SwiftGodotMacroLibrary"]
